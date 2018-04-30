@@ -4,57 +4,85 @@ import javax.swing.*;
 
 public class Fenetre extends JFrame{
 
+      private JTextField champAddrIp; 
+      private JTextField champPort; 
+      private JButton envoyer;
+      private JButton parcourir;
 
-   public Fenetre(int action, String titre){
-      super(titre);
-      this.setSize(400,150);
-      this.setLocationRelativeTo(null);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      
-      if(action == 1){
-        this.envoie();
+
+      public Fenetre(int action, String titre){
+         super(titre);
+         this.setSize(400,150);
+         this.setLocationRelativeTo(null);
+         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+         if(action == 1){
+            this.envoie();
+         }
+
+         if(action == 2){
+            this.reception();
+         }
       }
 
-      if(action == 2){
-        this.reception();
+
+      public void envoie(){
+         System.out.println("Envoie de fichier");
+
+         JLabel etiquetteAddrIp = new JLabel("IP");
+         this.champAddrIp = new JTextField();
+
+         JLabel port = new JLabel("Port");
+         this.champPort = new JTextField();
+
+         this.parcourir = new JButton("Parcourir");
+
+         this.envoyer = new JButton("Envoyer");
+         this.envoyer.setBackground(Color.RED);
+         this.envoyer.setEnabled(false);
+
+         JPanel panneauButton = new JPanel(new GridLayout(1,2));
+         panneauButton.add(this.parcourir);
+         panneauButton.add(this.envoyer);
+
+         JPanel panneau = new JPanel(new GridLayout(5,1));
+
+
+         ControleurFenetre controleur = new ControleurFenetre(this);
+
+         parcourir.addActionListener(controleur);
+         envoyer.addActionListener(controleur);
+
+         panneau.add(etiquetteAddrIp);
+         panneau.add(champAddrIp);
+         panneau.add(port);
+         panneau.add(champPort);
+         panneau.add(panneauButton);
+
+
+         this.add(panneau);
+
       }
-   }
 
 
-   public void envoie(){
-      System.out.println("Envoie de fichier");
-      
-      JLabel etiquetteAddrIp = new JLabel("IP");
-      JTextField champAddrIp = new JTextField();
-
-      JLabel port = new JLabel("Port");
-      JTextField champPort = new JTextField();
-
-      JButton parcourir = new JButton("Parcourir");
-      
-      JButton envoyer = new JButton("Envoyer");
-      envoyer.setBackground(Color.RED);
-
-      JPanel panneauButton = new JPanel(new GridLayout(1,2));
-      panneauButton.add(parcourir);
-      panneauButton.add(envoyer);
-
-      JPanel panneau = new JPanel(new GridLayout(5,1));
-
-      panneau.add(etiquetteAddrIp);
-      panneau.add(champAddrIp);
-      panneau.add(port);
-      panneau.add(champPort);
-      panneau.add(panneauButton);
-
-      this.add(panneau);
-   
-   }
+      public void reception(){
+         System.out.println("Reception de fichier");
+      }
 
 
-   public void reception(){
-      System.out.println("Reception de fichier");
+      public JTextField getChampsIp(){
+        return this.champAddrIp;
+      }
 
+      public JTextField getChampPort(){
+        return this.champPort;
+      }
 
-   }
+      public JButton getButtonEnvoyer(){
+        return this.envoyer;
+      }
+
+      public JButton getButtonParcourir(){
+        return this.parcourir;
+      }
 }
