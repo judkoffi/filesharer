@@ -16,12 +16,14 @@ public class Accueil extends JFrame implements ActionListener{
 
 
    public void init(){
-      JLabel etiquette = new JLabel("Filesharerr");
+      JLabel etiquette = new JLabel("Filesharer");
       JButton crypter = new JButton("Envoyer");
       JButton decrypter = new JButton("Recevoir");
 
 
-      JLabel img = new JLabel(new ImageIcon("./imgs/filesharer.png"));
+      JLabel img = new JLabel(new ImageIcon("./imgs/shared-folder.png"));
+      img.setOpaque(true);
+      img.setBackground(Color.ORANGE);
 
       JPanel panneaButton = new JPanel(new GridLayout(1,2));
 
@@ -36,7 +38,6 @@ public class Accueil extends JFrame implements ActionListener{
       etiquette.setFont(new Font("Arial", Font.BOLD, 50));
       etiquette.setHorizontalAlignment(JLabel.CENTER);
 
-      this.conteneur.add(etiquette, BorderLayout.NORTH);
       this.conteneur.add(img, BorderLayout.CENTER);
       this.conteneur.add(panneaButton, BorderLayout.SOUTH);
       this.add(this.conteneur);
