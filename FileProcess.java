@@ -78,6 +78,8 @@ public class FileProcess implements Runnable{
                      writer.flush();
                   }
 
+                  closeConnexion = true;
+
                }catch(IOException e){
                   
                   System.err.println("Erreur lecture");

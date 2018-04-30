@@ -5,22 +5,25 @@ import javax.swing.*;
 public class Fenetre extends JFrame{
 
       private JTextField champAddrIp; 
-      private JTextField champPort; 
+      private JTextField champPort;
+      private JTextField nomDestination;
       private JButton envoyer;
       private JButton parcourir;
+      private JButton recevoir;
 
 
       public Fenetre(int action, String titre){
          super(titre);
-         this.setSize(400,100);
          this.setLocationRelativeTo(null);
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
          if(action == 1){
+         this.setSize(400,100);
             this.envoie();
          }
 
          if(action == 2){
+            this.setSize(400,200);
             this.reception();
          }
       }
@@ -67,11 +70,42 @@ public class Fenetre extends JFrame{
 
       public void reception(){
          System.out.println("Reception de fichier");
+         JLabel etiquetteAddrIp = new JLabel("IP");
+         this.champAddrIp = new JTextField();
+
+         JLabel etiquetteNom = new JLabel("Enregistrer sous le nom");
+         this.nomDestination = new JTextField();
+
+         JLabel port = new JLabel("Port");
+         this.champPort = new JTextField();
+
+         this.recevoir = new JButton("Recevoir");
+         this.recevoir.setBackground(Color.RED);
+         this.recevoir.setEnabled(false);
+
+         JPanel panneauButton = new JPanel(new GridLayout(1,2));
+         panneauButton.add(this.recevoir);
+
+         JPanel panneau = new JPanel(new GridLayout(7,1));
+
+         ControleurFenetre controleur = new ControleurFenetre(this);
+
+         recevoir.addActionListener(controleur);
+
+         panneau.add(etiquetteAddrIp);
+         panneau.add(champAddrIp);
+         panneau.add(port);
+         panneau.add(champPort);
+         panneau.add(etiquetteNom);
+         panneau.add(nomDestination);
+         panneau.add(panneauButton);
+
+         this.add(panneau);
       }
 
 
       public JTextField getChampsIp(){
-        return this.champAddrIp;
+         return this.champAddrIp;
       }
 
       public JTextField getChampPort(){
