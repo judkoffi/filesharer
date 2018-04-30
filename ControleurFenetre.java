@@ -1,9 +1,10 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.text.*;
 
 public class ControleurFenetre implements ActionListener{
-
+   private String filename;
    private Fenetre fenetre;
 
    public ControleurFenetre(Fenetre f){
@@ -11,19 +12,12 @@ public class ControleurFenetre implements ActionListener{
    }
 
 
-
-
-
-
-
    @Override
    public void actionPerformed(ActionEvent evenement){
 
       if(evenement.getSource() == this.fenetre.getButtonParcourir()){
 
-         if( (!this.fenetre.getChampsIp().getText().equals("")) && (!this.fenetre.getChampPort().getText().equals("")) ){
-
-            String filename = "";
+         if(!this.fenetre.getChampPort().getText().equals("")){
 
             JFileChooser explorateur = new JFileChooser("./");
 
@@ -43,9 +37,20 @@ public class ControleurFenetre implements ActionListener{
 
          }else{
 
-            JOptionPane.showMessageDialog(this.fenetre,"Veuilez remplir l'adresse IP et le port","information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this.fenetre,"Veuilez remplir le port","information", JOptionPane.INFORMATION_MESSAGE);
 
          }
       }
+
+      if(evenement.getSource() == this.fenetre.getButtonEnvoyer()){
+         System.out.println("On peut envoyer");
+
+         int port = Integer.parseInt(this.fenetre.getChampPort().getText());
+
+         Server serveur = new Server(port, filename);
+         serveur.open();
+
+      }
+
    }
 }

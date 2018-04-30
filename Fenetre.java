@@ -12,7 +12,7 @@ public class Fenetre extends JFrame{
 
       public Fenetre(int action, String titre){
          super(titre);
-         this.setSize(400,150);
+         this.setSize(400,100);
          this.setLocationRelativeTo(null);
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -29,8 +29,8 @@ public class Fenetre extends JFrame{
       public void envoie(){
          System.out.println("Envoie de fichier");
 
-         JLabel etiquetteAddrIp = new JLabel("IP");
-         this.champAddrIp = new JTextField();
+         /*JLabel etiquetteAddrIp = new JLabel("IP");
+         this.champAddrIp = new JTextField();*/
 
          JLabel port = new JLabel("Port");
          this.champPort = new JTextField();
@@ -45,7 +45,7 @@ public class Fenetre extends JFrame{
          panneauButton.add(this.parcourir);
          panneauButton.add(this.envoyer);
 
-         JPanel panneau = new JPanel(new GridLayout(5,1));
+         JPanel panneau = new JPanel(new GridLayout(3,1));
 
 
          ControleurFenetre controleur = new ControleurFenetre(this);
@@ -53,8 +53,8 @@ public class Fenetre extends JFrame{
          parcourir.addActionListener(controleur);
          envoyer.addActionListener(controleur);
 
-         panneau.add(etiquetteAddrIp);
-         panneau.add(champAddrIp);
+        /* panneau.add(etiquetteAddrIp);
+         panneau.add(champAddrIp);*/
          panneau.add(port);
          panneau.add(champPort);
          panneau.add(panneauButton);

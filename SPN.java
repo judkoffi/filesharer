@@ -121,6 +121,7 @@ public class SPN {
 
       int octet = 0;
       short key = 1525;
+
       try{
          flux = new FileInputStream(this.fichier);
 
