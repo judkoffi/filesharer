@@ -23,9 +23,7 @@ public class FileProcess implements Runnable{
    }
 
    public void run(){
-
       System.err.println("Lancement du traitement de la connexion cliente");
-
       boolean closeConnexion = false;
 
       while(!sock.isClosed()){
@@ -36,7 +34,7 @@ public class FileProcess implements Runnable{
 
             reader = new BufferedInputStream(sock.getInputStream());
 
-           //String response = read();
+            //String response = read();
 
             InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
 
@@ -54,7 +52,7 @@ public class FileProcess implements Runnable{
 
             System.out.println("File "+ this.filename);
 
-            SPN spn = new SPN(this.filename, "crypter");
+            SPN spn = new SPN();
 
             FileInputStream flux = null;
 
@@ -66,24 +64,26 @@ public class FileProcess implements Runnable{
                flux = new FileInputStream(this.filename);
 
                try{
-            
+
                   while(flux.available() > 0){ 
-                  
+
                      octet = flux.read();
-                     
+
                      int tmp = spn.encrypt_block(octet, key);
-                     
+
+                     System.err.println("octet " + (char)octet + " crypted " + (char)tmp);
+
                      writer.write(tmp);
-                     
+
                      writer.flush();
                   }
 
                   closeConnexion = true;
 
                }catch(IOException e){
-                  
+
                   System.err.println("Erreur lecture");
-               
+
                }
 
             }catch(FileNotFoundException e){
@@ -92,7 +92,9 @@ public class FileProcess implements Runnable{
 
             if(closeConnexion){
 
-               System.err.println("COMMANDE CLOSE DETECTEE ! ");
+               //System.err.println("COMMANDE CLOSE DETECTEE ! ");
+
+               flux.close();
 
                writer = null;
 
@@ -120,13 +122,13 @@ public class FileProcess implements Runnable{
 
    }
 
-   private String read() throws IOException{      
-      String response = "";
-      int stream;
-      byte[] b = new byte[4096];
-      stream = reader.read(b);
-      response = new String(b, 0, stream);
-      return response;
-   }
+   /*private String read() throws IOException{      
+     String response = "";
+     int stream;
+     byte[] b = new byte[4096];
+     stream = reader.read(b);
+     response = new String(b, 0, stream);
+     return response;
+     }*/
 
 }

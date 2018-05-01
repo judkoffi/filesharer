@@ -14,6 +14,10 @@ public class SPN {
    public SPN(String filename, String type){
       this.fichier = new File(filename);
       this.mode = type;
+   }
+
+   public SPN(){
+
       this.inversePermutation = new int[8];
    }
 

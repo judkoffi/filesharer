@@ -27,16 +27,15 @@ public class Server implements Runnable {
 
    public void open(){
       Thread t  = new Thread(this);
-
       t.start();
-
    }
 
 
    @Override
    public void run(){
-      while(this.running){
+     // while(this.running){
          try{
+            System.out.println("Dans le run");
             Socket client = sockServeur.accept();
 
             Thread t = new Thread(new FileProcess(client,this.filename));
@@ -45,8 +44,9 @@ public class Server implements Runnable {
          }catch(IOException e){
             e.printStackTrace();
          }
-      }
+     // }
 
+      System.out.println("Plus dans le run");
       try {
          sockServeur.close();
       } catch (IOException e) {
